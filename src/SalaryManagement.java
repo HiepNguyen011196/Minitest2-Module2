@@ -1,33 +1,50 @@
+import java.util.ArrayList;
+
 public class SalaryManagement {
+    private static ArrayList<Employee> employees = new ArrayList<>();
+
     public static void main(String[] args) {
-        Employee [] employees = new Employee[5];
-        employees[0] = new FullTimeEmployee(100, "NguyenHoangHiep", 26, "0849582782", "gagga5376@gmail.com", 10000000, 500000, 50000000);
-        employees[1] = new FullTimeEmployee(101, "NguyenManhHien", 25, "0328601702", "nguyenhien81f@gmail.com", 15000000, 100000, 40000000);
-        employees[2] = new FullTimeEmployee(102, "NgoTrongHieu", 24, "0979276402", "imbakito1604@gmail.com", 1000000, 5000000, 45000000);
-        employees[3] = new PartTimeEmployee(103, "BuiQuangAnh", 22, "0988163947", "quanganhbui2703@gmail.com", 38);
-        employees[4] = new PartTimeEmployee(104, "DaoVanTrong", 24, "0398299898", "daovantrong98@gmail.com", 20);
+        FullTimeEmployee b1 = new FullTimeEmployee(100, 0, 10000);
+        FullTimeEmployee b2 = new FullTimeEmployee(10, 50, 20000);
+        PartTimeEmployee b3 = new PartTimeEmployee(3.4f);
+        PartTimeEmployee b4 = new PartTimeEmployee(10.0f);
+        employees.add(b1);
+        employees.add(b2);
+        employees.add(b3);
+        employees.add(b4);
 
-        System.out.println("Total salary of fulltime employees is: " + FullTimeEmployeeSalary(employees));
-        System.out.println("Total salary of partime employees is: " + PartTimeEmployeeSalary(employees));
-
-        int averageSalary = (FullTimeEmployeeSalary(employees) + PartTimeEmployeeSalary(employees)) / 5;
+        System.out.println(getFullTimeUnderSalary());
+        System.out.println(getPartTimeSalary());
     }
 
-    public static int FullTimeEmployeeSalary(Employee []employees) {
-        for (Employee employee : employees) {
-            if (employee instanceof FullTimeEmployee) {
-                return ((FullTimeEmployee) employee).getFixSalary() + ((FullTimeEmployee) employee).getBonus() - ((FullTimeEmployee) employee).getFines();
-            }
+    //    1. Lay ra luong trung binh cua cong ty
+    public static float getAverageSalary(){
+        float sum= 0;
+        for (Employee e: employees
+        ) {
+            sum += e.getSalary();
         }
-        return 0;
+        float average = sum/employees.size();
+        return average;
     }
-
-    public static int PartTimeEmployeeSalary(Employee []employees) {
+    //    2. Lay danh sach nhan vien luong thap hon luong tb
+    public static ArrayList<Employee> getFullTimeUnderSalary(){
+        ArrayList<Employee> employeeArrayList = new ArrayList<>();
+        float average = getAverageSalary();
         for (Employee employee : employees) {
-            if (employee instanceof PartTimeEmployee) {
-                return ((PartTimeEmployee) employee).getHours() * 100000;
-            }
+            if (employee instanceof FullTimeEmployee &&
+                    employee.getSalary() < average)
+                employeeArrayList.add(employee);
         }
-        return 0;
+        return employeeArrayList;
+    }
+    // 3. Phuong thuc tinh luong phai tra cho Part-time employees
+    public static float getPartTimeSalary(){
+        float sum = 0;
+        for (Employee employee : employees) {
+            if (employee instanceof PartTimeEmployee)
+                sum += employee.getSalary();
+        }
+        return sum;
     }
 }

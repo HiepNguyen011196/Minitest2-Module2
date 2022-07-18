@@ -1,23 +1,35 @@
-public class PartTimeEmployee extends Employee{
-    int hours;
+public class PartTimeEmployee extends Employee {
+    private float workHours;
 
-    public PartTimeEmployee(){
+    public PartTimeEmployee(String id, String fullName, int age, String phone, String email, float workHours) {
+        super(id, fullName, age, phone, email);
+        this.workHours = workHours;
     }
 
-    public PartTimeEmployee(int employeeCode, String fullName, int age, String phone, String email, int hours) {
-        this.employeeCode = employeeCode;
-        this.fullName = fullName;
-        this.age = age;
-        this.phone = phone;
-        this.email = email;
-        this.hours = hours;
+    public PartTimeEmployee(float workHours) {
+        this.workHours = workHours;
     }
 
-    public int getHours() {
-        return hours;
+    @Override
+    public float getSalary() {
+        return workHours*100;
     }
 
-    public void setHours(int hours) {
-        this.hours = hours;
+    public PartTimeEmployee() {
+    }
+
+    public float getWorkHours() {
+        return workHours;
+    }
+
+    public void setWorkHours(float workHours) {
+        this.workHours = workHours;
+    }
+
+    @Override
+    public String toString() {
+        return "PartTimeEmployee{" +
+                "workHours=" + workHours +
+                '}';
     }
 }

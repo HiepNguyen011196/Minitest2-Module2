@@ -1,27 +1,29 @@
-public class Employee {
-    int employeeCode;
-    String fullName;
-    int age;
-    String phone;
-    String email;
+public abstract class Employee {
+    private String id;
+    private String fullName;
+    private int age;
+    private String phone;
+    private String email;
 
-    public Employee(int employeeCode, String fullName, int age, String phone, String email) {
-        this.employeeCode = employeeCode;
+    public abstract float getSalary();
+
+    public Employee() {
+    }
+
+    public Employee(String id, String fullName, int age, String phone, String email) {
+        this.id = id;
         this.fullName = fullName;
         this.age = age;
         this.phone = phone;
         this.email = email;
     }
 
-    public Employee() {
+    public String getId() {
+        return id;
     }
 
-    public int getEmployeeCode() {
-        return employeeCode;
-    }
-
-    public void setEmployeeCode(int employeeCode) {
-        this.employeeCode = employeeCode;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getFullName() {

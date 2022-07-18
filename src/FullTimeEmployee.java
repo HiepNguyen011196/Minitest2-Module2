@@ -1,12 +1,28 @@
 public class FullTimeEmployee extends Employee {
-    int bonus;
-    int fines;
-    int fixSalary;
+    private int bonus;
+    private int fines;
+    private int netSalary;
 
-    public FullTimeEmployee(int employeeCode, String fullName, int age, String phone, String email, int bonus, int fines, int fixSalary) {
+    @Override
+    public float getSalary() {
+        float salary = netSalary+ bonus- fines;
+        return salary;
+    }
+
+    public FullTimeEmployee(int bonus, int fines, int netSalary) {
         this.bonus = bonus;
         this.fines = fines;
-        this.fixSalary = fixSalary;
+        this.netSalary = netSalary;
+    }
+
+    public FullTimeEmployee() {
+    }
+
+    public FullTimeEmployee(String id, String fullName, int age, String phone, String email, int bonus, int fines, int salary) {
+        super(id, fullName, age, phone, email);
+        this.bonus = bonus;
+        this.fines = fines;
+        this.netSalary = salary;
     }
 
     public int getBonus() {
@@ -25,11 +41,20 @@ public class FullTimeEmployee extends Employee {
         this.fines = fines;
     }
 
-    public int getFixSalary() {
-        return fixSalary;
+    public int getNetSalary() {
+        return netSalary;
     }
 
-    public void setFixSalary(int fixSalary) {
-        this.fixSalary = fixSalary;
+    public void setNetSalary(int netSalary) {
+        this.netSalary = netSalary;
+    }
+
+    @Override
+    public String toString() {
+        return "model.FulltimeEmployee{" +
+                "bonus=" + bonus +
+                ", fines=" + fines +
+                ", salary=" + netSalary +
+                '}';
     }
 }
